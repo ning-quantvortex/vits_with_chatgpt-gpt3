@@ -25,13 +25,15 @@ import openai
 
 #设定存储各种数据的目录，方便查看，默认C:/project_file
 current_work_dir = os.path.dirname(__file__)
-weight_path = os.path.join(current_work_dir, '/project_file/')
+print("current work dir is : " + current_work_dir)
+weight_path = os.path.dirname('/home/ning/workspace/UE5/vits_with_chatgpt-gpt3/project_file')
+print(weight_path)
 app = Flask(__name__)
 mutex = threading.Lock()
 #设置gpu推理
 dev = torch.device("cuda:0")
 #导入config文件
-hps_ms = utils.get_hparams_from_file("path/to/config.json")
+hps_ms = utils.get_hparams_from_file("/home/ning/workspace/UE5/vits_with_chatgpt-gpt3/config.json")
 #加载多人模型
 net_g_ms = SynthesizerTrn(
     len(symbols),
@@ -41,7 +43,7 @@ net_g_ms = SynthesizerTrn(
     **hps_ms.model).to(dev)
 _ = net_g_ms.eval()
 #导入模型文件
-_ = utils.load_checkpoint("path/to/checkpoint.pth", net_g_ms, None)
+_ = utils.load_checkpoint("/home/ning/workspace/UE5/vits_with_chatgpt-gpt3/models/1374_epochs.pth", net_g_ms, None)
 #预处理
 def get_text(text, hps):
     text_norm = text_to_sequence(text, hps.data.text_cleaners)
