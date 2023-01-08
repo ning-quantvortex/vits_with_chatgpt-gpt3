@@ -1,21 +1,26 @@
 # 焊接chatgpt/gpt3和vits的后端api程序
 # Combining chatgpt/gpt3&vits on your server
-用api启动的目的是搭建lovelive的聊天网站,我自己写的renpy应用需要live2d模型。还可以尝试诸如mmd模型，简单的图片等诸多方式。
+```sh
+核心思路:把启动文件丢进你的vits项目，部署服务器。
+这只是一种思路，建议根据自己的需求自行修改，先实现普通的tts后再去整大活，比如随时随地掏出手机和老婆聊天()。
 部署到服务器以后的标准网页格式,http://yourhost:8080/
-前端应用地址https://drive.google.com/drive/folders/1vtootVMQ7wTOQwd15nJe6akzJUYNOw4d
-服务器配置好后
+之后diy一份简单的前端莱搭建live2d互动，这里采用renpy
+用于参考的应用地址https://drive.google.com/drive/folders/1vtootVMQ7wTOQwd15nJe6akzJUYNOw4d
 解压live2d_chat-0.6(gpt3+chatgpt).zip，或lightweight_chat-1.0-win.zip
-前者可以在应用端自定义各种配置，后者可以直接对话，但是需要你进入lightweight_chat-1.0-win/game文件中修改网页地址
-建议安装renpy后修改游戏程序，参照官网学习，自定义你的live2d模型和交互方式。
-
+前者的思路是在应用启动后修改各种模型参数，适合多说话人。调试完成后可修改进入game目录修改script.rpy来简化应用。后者是单说话人的版本，但是需要你进入lightweight_chat-1.0-win/game文件中修改网页地址
+建议安装renpy后修改script.rpy，参照官网学习。准备好你的live2d模型并且用面部捕捉准备足够多的表情。
+```
+## 启动api
 ## How to launch API in your windows or server
 Pre-requisites: cmake ffmpeg
 Python == 3.8/3.7
+## 准备好vits项目
 ## Clone a VITS repository or iSTFT-VITS repository
 ```sh
 git clone https://github.com/CjangCjengh/vits.git
 #git clone https://github.com/innnky/MB-iSTFT-VITS
 ```
+## 多说话人模型
 ## Get the model and config
 - See https://github.com/CjangCjengh/TTSModels or other repositorise in Github or huggingface
 ## Adding cleaners&inference_api.py to your project
@@ -24,12 +29,14 @@ git clone https://github.com/CjangCjengh/vits.git
 - Remove unnecessary imports from text/cleaners.py
 - The path of inference_api.py should be like path/to/vits/inference_api.py
 - If you want to launch this project in your server, it is recommended to use iSTFT-VITS for tts: path/to/MB-iSTFT-VITS/inference_api.py
+## 安装环境
 ## Install requirements of vits enviornments
 ```sh
 cd vits
 #cd MB-iSTFT-VITS
 pip install -r requirements.txt
 ```
+## 设置分词
 ## Build Monotonic Alignment Search and run preprocessing
 ```sh
 # Cython-version Monotonoic Alignment Search
@@ -39,6 +46,7 @@ python setup.py build_ext --inplace
 cd vits
 #cd MB-iSTFT-VITS
 ```
+## 安装chatgpt相关包
 ## Install requirements for using GPT3/CHATGPT in python
 ```sh
 pip install pydub 
@@ -46,6 +54,7 @@ pip install openai
 #Not recommended due to demanding requirements
 #pip install pyChatGPT
 ```
+## 修改执行文件中的模型路径
 ## Editing the path of configuration file in inference_api.py
 ```sh
 line26:#设定存储各种数据的目录，方便查看，默认C:/project_file
@@ -59,6 +68,24 @@ line43:_ = utils.load_checkpoint("path/to/checkpoint.pth", net_g_ms, None)
 #change this line to dev = torch.device("cpu")
 line32:dev = torch.device("cuda:0")
 ```
+## 启动后端
+## launch
+```sh
+python inference_api.py
+```
+## 下一步
+## What to do next?
+As you can see in the temminal
+```sh
+ * Serving Flask app 'inference_api'
+ * Debug mode: on
+INFO:werkzeug: WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.0.0.14:8080
+INFO:werkzeug: Press CTRL+C to quit
+```
+Which means you can try it in the game now
 ## If you want to chat directly with your waifu without any setting in your devices
 See https://github.com/Paraworks/vits_with_chatgpt-gpt3/blob/main/one_step.py
 ```sh
@@ -108,22 +135,6 @@ label speak:
     nengdai '[response]'
     jump sense1
 ```
-## launch
-```sh
-python inference_api.py
-```
-## What to do next?
-As you can see in the temminal
-```sh
- * Serving Flask app 'inference_api'
- * Debug mode: on
-INFO:werkzeug: WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:8080
- * Running on http://10.0.0.14:8080
-INFO:werkzeug: Press CTRL+C to quit
-```
-Which means you can try it in the game now
 ## Why using api?
 不会真有人想每次都要启动一堆程序，配置个半天，吃电脑一大半内存和显存来跟纸片人聊天吧，反正我调试完之后肯定不会，20块一个月的服务器不香吗？
 ## Real usage for api
