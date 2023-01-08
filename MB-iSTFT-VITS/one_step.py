@@ -33,7 +33,7 @@ import time
 #Editing your setting here
 def friend_chat(text):
   call_name = "qiqi"
-  openai.api_key = "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"
+  openai.api_key = ""
   identity = "my waifu"
   start_sequence = '\n'+str(call_name)+':'
   restart_sequence = "\nYou: "

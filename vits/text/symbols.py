@@ -9,9 +9,9 @@ _letters = 'AEINOQUabdefghijkmnoprstuvwyzʃʧ↓↑ '
 '''
 
 # japanese_cleaners2
-_pad        = '_'
-_punctuation = ',.!?-~…'
-_letters = 'AEINOQUabdefghijkmnoprstuvwyzʃʧʦ↓↑ '
+# _pad        = '_'
+# _punctuation = ',.!?-~…'
+# _letters = 'AEINOQUabdefghijkmnoprstuvwyzʃʧʦ↓↑ '
 
 
 '''# korean_cleaners
@@ -26,11 +26,11 @@ _punctuation = '，。！？—…'
 _letters = 'ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦㄧㄨㄩˉˊˇˋ˙ '
 '''
 
-'''# zh_ja_mixture_cleaners
+# zh_ja_mixture_cleaners
 _pad        = '_'
 _punctuation = ',.!?-~…'
 _letters = 'AEINOQUabdefghijklmnoprstuvwyzʃʧʦɯɹəɥ⁼ʰ`→↓↑ '
-'''
+
 
 '''# sanskrit_cleaners
 _pad        = '_'
@@ -50,11 +50,10 @@ _punctuation = '.!? '
 _letters = 'กขฃคฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลวศษสหฬอฮฯะัาำิีึืุูเแโใไๅๆ็่้๊๋์'
 '''
 
-'''# cjke_cleaners2
-_pad        = '_'
-_punctuation = ',.!?-~…'
-_letters = 'NQabdefghijklmnopstuvwxyzɑæʃʑçɯɪɔɛɹðəɫɥɸʊɾʒθβŋɦ⁼ʰ`^#*=ˈˌ→↓↑ '
-'''
+# # cjke_cleaners2
+# _pad        = '_'
+# _punctuation = ',.!?-~…'
+# _letters = 'NQabdefghijklmnopstuvwxyzɑæʃʑçɯɪɔɛɹðəɫɥɸʊɾʒθβŋɦ⁼ʰ`^#*=ˈˌ→↓↑ '
 
 '''# shanghainese_cleaners
 _pad        = '_'
